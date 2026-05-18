@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Lab 4 Калькулятор</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      display: flex; justify-content: center; align-items: center;
+      min-height: 100vh;
+      font-family: 'Courier New', monospace;
+    }
+    .calc {
+      background: #000000;
+      border: 1px solid #0f3460;
+      padding: 24px;
+      width: 370px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    #display {
+      width: 100%;
+      background: #ffffff;
+      color: #000000;
+      font-size: 22px;
+      text-align: right;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+      min-height: 52px;
+      word-break: break-all;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    button {
+      padding: 14px 0;
+      font-size: 16px;
+      font-family: 'Courier New', monospace;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      background: #ff8000;
+      color: #e0e0e0;
+    }
+    button:active { transform: scale(0.95); }
+    button:hover { background: #4d7607; }
+    .btn-op  { background: #e94560; color: #fff; }
+    .btn-op:hover { background: #c73652; }
+    .btn-eq  { background: #0f9b58; color: #fff; grid-column: span 2; }
+    .btn-eq:hover { background: #0d7a46; }
+    .btn-clr { background: #7a1e2e; color: #fff; }
+    .btn-clr:hover { background: #9b2a3a; }
+    .btn-br  { background: #1a3a5c; color: #a0c4ff; }
+  </style>
+</head>
+<body>
+<div class="calc">
+  <div id="display">0</div>
+  <div class="buttons">
+    <!-- row 1 -->
+    <button class="btn-clr" onclick="clearDisplay()">C</button>
+    <button class="btn-br"  onclick="append('(')">(</button>
+    <button class="btn-br"  onclick="append(')')">)</button>
+    <button class="btn-op"  onclick="append('/')">÷</button>
+    <!-- row 2 -->
+    <button onclick="append('7')">7</button>
+    <button onclick="append('8')">8</button>
+    <button onclick="append('9')">9</button>
+    <button class="btn-op" onclick="append('*')">×</button>
+    <!-- row 3 -->
+    <button onclick="append('4')">4</button>
+    <button onclick="append('5')">5</button>
+    <button onclick="append('6')">6</button>
+    <button class="btn-op" onclick="append('-')">−</button>
+    <!-- row 4 -->
+    <button onclick="append('1')">1</button>
+    <button onclick="append('2')">2</button>
+    <button onclick="append('3')">3</button>
+    <button class="btn-op" onclick="append('+')">+</button>
+    <!-- row 5 -->
+    <button onclick="append('0')">0</button>
+    <button onclick="append('.')">.</button>
+    <button class="btn-eq" onclick="calculate()">=</button>
+  </div>
+</div>
+ 
+<script>
+  let expr = '';
+ 
+  function updateDisplay(val) {
+    document.getElementById('display').textContent = val || '0';
+  }
+ 
+  function append(char) {
+    if (expr === '0' && char !== '.' && !'+-*/('.includes(char)) expr = '';
+    expr += char;
+    updateDisplay(expr);
+  }
+ 
+  function clearDisplay() {
+    expr = '';
+    updateDisplay('0');
+  }
+ 
+  async function calculate() {
+    if (!expr) return;
+ 
+    // POST запрос на сервер
+    const formData = new FormData();
+    formData.append('expression', expr);
+ 
+    try {
+      const response = await fetch('calc.php', {
+        method: 'POST',
+        body: formData
+      });
+      const text = await response.text();
+ 
+      // Результат приходит через GET-параметр в редиректе,
+      // но т.к. мы используем fetch, читаем тело ответа напрямую
+      updateDisplay(text.trim());
+      expr = text.trim();
+    } catch (e) {
+      updateDisplay('Ошибка');
+      expr = '';
+    }
+  }
+</script>
+</body>
+</html>
