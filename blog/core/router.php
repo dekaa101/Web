@@ -19,8 +19,10 @@ class Router
         foreach ($this->routes as $route) {
             $params = $this->match($route['path'], $uri);
             if ($params !== null) {
-                $content = call_user_func_array($route['handler'], $params);
-                $this->render($content);
+                $result = call_user_func_array($route['handler'], $params);
+                $content = is_array($result) ? $result['content'] : $result;
+                $title   = is_array($result) ? ($result['title'] ?? 'Мой блог') : 'Мой блог';
+                $this->render($content, $title);
                 return;
             }
         }
@@ -46,7 +48,7 @@ class Router
     }
  
     /** Оборачивает контент в общий HTML-шаблон */
-    private function render(string $content): void
+    private function render(string $content, string $title = 'Мой блог'): void
     {
         require __DIR__ . '/../views/layout.php';
     }
