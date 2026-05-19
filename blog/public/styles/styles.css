@@ -1,0 +1,77 @@
+/* ── Оригинальные стили из style.css ──────────────────────────── */
+ 
+.layout {
+    width: 100%;
+    max-width: 1024px;
+    margin: auto;
+    background-color: white;
+    border-collapse: collapse;
+}
+ 
+.layout tr td {
+    padding: 20px;
+    vertical-align: top;
+    border: solid 1px gray;
+}
+ 
+.header {
+    font-size: 30px;
+}
+ 
+.footer {
+    text-align: center;
+}
+ 
+.sidebarHeader {
+    font-size: 20px;
+}
+ 
+.sidebar ul {
+    padding-left: 20px;
+}
+ 
+a, a:visited {
+    color: darkgreen;
+}
+ 
+/* ── Стили для greeting-карточек (sayHello / sayBye) ──────────── */
+ 
+.greeting-card {
+    text-align: center;
+    padding: 40px 20px;
+}
+ 
+.greeting-icon {
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+ 
+.greeting-card h2 {
+    font-size: 32px;
+    margin: 0 0 10px;
+    color: #333;
+}
+ 
+.greeting-card p {
+    color: #666;
+    margin-bottom: 24px;
+}
+ 
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    background-color: darkgreen;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 15px;
+    transition: background 0.2s;
+}
+ 
+.btn:visited {
+    color: white !important;
+}
+ 
+.btn:hover {
+    background-color: #005500;
+}
