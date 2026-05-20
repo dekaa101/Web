@@ -24,6 +24,8 @@
             <ul>
                 <li><a href="/">Главная страница</a></li>
                 <li><a href="/about-me">Обо мне</a></li>
+                <li><a href="/articles/1">Статья 1</a></li>
+                <li><a href="/articles/2">Статья 2</a></li>
             </ul>
             <div class="sidebarHeader" style="margin-top:20px;">Попробовать</div>
             <ul>

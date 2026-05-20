@@ -2,6 +2,7 @@
  
 require_once __DIR__ . '/../core/router.php';
 require_once __DIR__ . '/../controllers/GreetingController.php';
+require_once __DIR__ . '/../controllers/ArticlesController.php';
  
 $router = new Router();
  
@@ -10,6 +11,7 @@ $router->get('/',           fn() => mainPage());
 $router->get('/about-me',   fn() => aboutPage());
 $router->get('/hello/{name}', fn($name) => (new GreetingController())->sayHello($name));
 $router->get('/bye/{name}',   fn($name) => (new GreetingController())->sayBye($name));
+$router->get('/articles/{id}', fn($id) => (new ArticlesController())->show($id));
  
 $router->dispatch($_SERVER['REQUEST_URI']);
  
