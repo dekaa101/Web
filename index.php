@@ -67,6 +67,8 @@
     <main>
         <div class="dynamic-content">
             <?php
+                date_default_timezone_set('Europe/Moscow');
+                
                 // Динамический контент
                 $hello = "Hello, World!";
                 $currentDateTime = date("d.m.Y H:i:s");
