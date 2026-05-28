@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/styles/styles.css">
 </head>
 <body>
- 
+
 <table class="layout">
     <tr>
         <td colspan="2" class="header">
@@ -18,14 +18,14 @@
         <td>
             <?= $content ?>
         </td>
- 
+
         <td width="300px" class="sidebar">
             <div class="sidebarHeader">Меню</div>
             <ul>
                 <li><a href="/">Главная страница</a></li>
                 <li><a href="/about-me">Обо мне</a></li>
-                <li><a href="/articles/1">Статья 1</a></li>
-                <li><a href="/articles/2">Статья 2</a></li>
+                <li><a href="/articles/1">Статья 1</a> — <a href="/article/1/edit">Редактирование</a></li>
+                <li><a href="/articles/2">Статья 2</a> — <a href="/article/2/edit">Редактирование</a></li>
             </ul>
             <div class="sidebarHeader" style="margin-top:20px;">Попробовать</div>
             <ul>
@@ -38,6 +38,6 @@
         <td class="footer" colspan="2">Все права защищены (c) Мой блог</td>
     </tr>
 </table>
- 
+
 </body>
 </html>

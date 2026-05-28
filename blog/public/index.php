@@ -12,6 +12,8 @@ $router->get('/about-me',   fn() => aboutPage());
 $router->get('/hello/{name}', fn($name) => (new GreetingController())->sayHello($name));
 $router->get('/bye/{name}',   fn($name) => (new GreetingController())->sayBye($name));
 $router->get('/articles/{id}', fn($id) => (new ArticlesController())->show($id));
+$router->get('~^/article/(\d+)/edit$~', fn($id) => (new ArticlesController())->edit($id));
+$router->post('~^/article/(\d+)/edit$~', fn($id) => (new ArticlesController())->update($id));
  
 $router->dispatch($_SERVER['REQUEST_URI']);
  

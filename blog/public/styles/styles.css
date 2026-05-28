@@ -75,3 +75,34 @@ a, a:visited {
 .btn:hover {
     background-color: #005500;
 }
+
+/* Форма редактирования */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 15px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 15px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    height: 150px;
+    box-sizing: border-box;
+}
