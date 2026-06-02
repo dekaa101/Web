@@ -19,14 +19,22 @@ $router->dispatch($_SERVER['REQUEST_URI']);
  
 // Вспомогательные страницы 
  
-function mainPage(): string {
+function mainPage(): array {
+    require_once __DIR__ . '/../core/Database.php';
+    $db = Database::getConnection();
+    $stmt = $db->query("SELECT articles.*, users.nickname FROM articles JOIN users ON articles.user_id = users.id");
+    $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     ob_start(); ?>
-    <h2>Печенья</h2>
-    <p>Всем хелоу, я сегодня съел Oreo</p>
-    <hr>
-    <h2>Статья 2</h2>
-    <p>Текс для второй статьи</p>
-    <?php return ob_get_clean();
+    <?php foreach ($articles as $article): ?>
+        <h2><?= htmlspecialchars($article['title']) ?></h2>
+        <p class="author">Автор: <strong><?= htmlspecialchars($article['nickname']) ?></strong></p>
+        <p><?= htmlspecialchars($article['content']) ?></p>
+        <a href="/article/<?= $article['id'] ?>/edit">Редактировать</a>
+        <hr>
+    <?php endforeach; ?>
+    <?php
+    return ['title' => 'Мой блог', 'content' => ob_get_clean()];
 }
  
 function aboutPage(): string {
